@@ -1,6 +1,7 @@
 import User from "../models/user-model.js";
 import { errorHandler } from "../utils/error.js";
 import bcrypt from "bcrypt";
+import Listing from "../models/listing.model.js";
 
 export const test = (req, res) => {
   res.json({
@@ -58,4 +59,19 @@ export const deleteUser = async (req, res, next) => {
 };
 
 
-
+export const getUserListings = async (req,res,next)=>{
+  console.log("req.user.id",req.user.id);
+  console.log("req.params.id",req.params.id);
+  if(req.user.id === req.params.id){
+    
+  try {
+    const listings = await Listing.find({useRef:req.params.id});
+    console.log("lisitngs",listings);
+    res.status(200).json(listings);
+  } catch (error) {
+    next(error)
+  }
+  }else{
+    return next(errorHandler(401, 'You can only view your own lisitngs!'));
+  }
+} 
