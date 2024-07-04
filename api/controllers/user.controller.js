@@ -60,6 +60,7 @@ export const deleteUser = async (req, res, next) => {
 
 
 export const getUserListings = async (req,res,next)=>{
+  console.log("entered getUserLisitngs")
   console.log("req.user.id",req.user.id);
   console.log("req.params.id",req.params.id);
   if(req.user.id === req.params.id){
