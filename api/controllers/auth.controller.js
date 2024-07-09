@@ -53,6 +53,7 @@ export const signin = async (req,res,next)=>{
 
 
 export const google = async (req,res,next) =>{
+    console.log("enterd inside of the google function",google);
     try {
        const user = await User.findOne({email : req.body.email});
        if(user){

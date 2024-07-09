@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
-import { MdLocationOn } from 'react-icons/md';
+import { Link } from "react-router-dom";
+import { MdLocationOn } from "react-icons/md";
 
-export default function ListingItems({listing}) {
+export default function ListingItems({ listing }) {
   return (
     <div className="bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full sm:w-[330px]">
       <Link to={`/listing/${listing._id}`}>

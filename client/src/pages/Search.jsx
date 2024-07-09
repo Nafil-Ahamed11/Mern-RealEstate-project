@@ -16,7 +16,7 @@ export default function Search() {
 
   const [loading, setLoading] = useState(false);
   const [listings, setListings] = useState([]);
-    const [showMore, setShowMore] = useState(false);
+  const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -52,15 +52,15 @@ export default function Search() {
       setLoading(true);
       setShowMore(false);
       const searchQuery = urlParams.toString();
-      console.log('searchQuery',searchQuery);
+      console.log("searchQuery", searchQuery);
       const res = await fetch(`/api/listing/get?${searchQuery}`);
       const data = await res.json();
-      if(data.length > 8){
+      if (data.length > 8) {
         setShowMore(true);
-      }else{
+      } else {
         setShowMore(false);
       }
-      
+
       setListings(data);
       setLoading(false);
     };
@@ -117,7 +117,7 @@ export default function Search() {
     const numberOfListings = listings.length;
     const startIndex = numberOfListings;
     const urlParams = new URLSearchParams(location.search);
-    urlParams.set('startIndex', startIndex);
+    urlParams.set("startIndex", startIndex);
     const searchQuery = urlParams.toString();
     const res = await fetch(`/api/listing/get?${searchQuery}`);
     const data = await res.json();
@@ -241,12 +241,10 @@ export default function Search() {
         <h1>Listing results</h1>
         <div className="p-7  flex flex-wrap gap-4 ">
           {!loading && listings.length === 0 && (
-            <p className="text-xl text-slate-700 ">
-              no Lisitng Found!
-            </p>
+            <p className="text-xl text-slate-700 ">no Lisitng Found!</p>
           )}
-           {loading && (
-            <p className='text-xl text-slate-700 text-center w-full'>
+          {loading && (
+            <p className="text-xl text-slate-700 text-center w-full">
               Loading...
             </p>
           )}
@@ -256,10 +254,10 @@ export default function Search() {
             listings.map((listing) => (
               <ListingItems key={listing._id} listing={listing} />
             ))}
-            {showMore && (
+          {showMore && (
             <button
               onClick={onShowMoreClick}
-              className='text-green-700 hover:underline p-7 text-center w-full'
+              className="text-green-700 hover:underline p-7 text-center w-full"
             >
               Show more
             </button>

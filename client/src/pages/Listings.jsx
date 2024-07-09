@@ -1,4 +1,4 @@
-import { useEffect, useState , useRef} from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
@@ -15,8 +15,6 @@ import {
   FaShare,
 } from 'react-icons/fa';
 
-
-
 export default function Listing() {
   SwiperCore.use([Navigation]);
   const [listing, setListing] = useState(null);
@@ -25,7 +23,7 @@ export default function Listing() {
   const [copied, setCopied] = useState(false);
   const [contact, setContact] = useState(false);
   const params = useParams();
-  const {currentUser} = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.user);
   
   useEffect(() => {
     const fetchListing = async () => {
@@ -66,7 +64,6 @@ export default function Listing() {
                   style={{
                     background: `url(${url}) center no-repeat`,
                     backgroundSize: 'cover',
-                    
                   }}
                 ></div>
               </SwiperSlide>
@@ -93,7 +90,7 @@ export default function Listing() {
             <p className='text-2xl font-semibold'>
               {listing.name} - ${' '}
               {listing.offer
-                ? listing.discountPrice.toLocaleString('en-US')
+                ? listing.regularPrice.toLocaleString('en-US')
                 : listing.regularPrice.toLocaleString('en-US')}
               {listing.type === 'rent' && ' / month'}
             </p>
@@ -107,7 +104,7 @@ export default function Listing() {
               </p>
               {listing.offer && (
                 <p className='bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-md'>
-                  ${+listing.regularPrice - +listing.discountPrice} OFF
+                  ${listing.discountPrice.toLocaleString('en-US')} OFF
                 </p>
               )}
             </div>

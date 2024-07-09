@@ -16,16 +16,17 @@ export const createListing = async (req, res, next) => {
 export const deleteListing = async (req, res, next) => {
   console.log("entering the delete functionlity");
   const listing = await Listing.findById(req.params.id);
-  if (listing) {
+  if (!listing) {
     return next(errorHandler(404, "Lisitng not found"));
   }
 
-  if (req.user.id !== listing.useRef()) {
+  if (req.user.id !== listing.useRef) {
     return next(errorHandler(401, "you can only delete your own listings !"));
   }
 
   try {
     await Listing.findByIdAndDelete(req.params.id);
+    res.status(200).json('Listing has been deleted!');
   } catch (error) {
     next(error);
   }
